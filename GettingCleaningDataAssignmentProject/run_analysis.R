@@ -11,22 +11,14 @@ unzip(temp, exdir = "~/Data_Science_Files/week4")
 rm(temp)
 
 ##Read the files into R
-subject_test <- read.table("~/Data_Science_Files/week4/UCI HAR Dataset/test/subject_test.txt",
-                           header = FALSE)
-X_test <- read.table("~/Data_Science_Files/week4/UCI HAR Dataset/test/X_test.txt",
-                     header = FALSE)
-y_test <- read.table("~/Data_Science_Files/week4/UCI HAR Dataset/test/y_test.txt",
-                     header = FALSE)
-subject_train <- read.table("~/Data_Science_Files/week4/UCI HAR Dataset/train/subject_train.txt",
-                            header = FALSE)
-X_train <- read.table("~/Data_Science_Files/week4/UCI HAR Dataset/train/X_train.txt",
-                      header = FALSE)
-y_train <- read.table("~/Data_Science_Files/week4/UCI HAR Dataset/train/y_train.txt",
-                      header = FALSE)
-activity_labels <- read.table("~/Data_Science_Files/week4/UCI HAR Dataset/activity_labels.txt",
-                              header = FALSE)
-features <- read.table("~/Data_Science_Files/week4/UCI HAR Dataset/features.txt",
-                       header = FALSE)
+subject_test <- read.table("~/Data_Science_Files/week4/UCI HAR Dataset/test/subject_test.txt", header = FALSE)
+X_test <- read.table("~/Data_Science_Files/week4/UCI HAR Dataset/test/X_test.txt", header = FALSE)
+y_test <- read.table("~/Data_Science_Files/week4/UCI HAR Dataset/test/y_test.txt", header = FALSE)
+subject_train <- read.table("~/Data_Science_Files/week4/UCI HAR Dataset/train/subject_train.txt", header = FALSE)
+X_train <- read.table("~/Data_Science_Files/week4/UCI HAR Dataset/train/X_train.txt", header = FALSE)
+y_train <- read.table("~/Data_Science_Files/week4/UCI HAR Dataset/train/y_train.txt", header = FALSE)
+activity_labels <- read.table("~/Data_Science_Files/week4/UCI HAR Dataset/activity_labels.txt", header = FALSE)
+features <- read.table("~/Data_Science_Files/week4/UCI HAR Dataset/features.txt", header = FALSE)
 
 ##Create two datasets with the test and train datasets
 test <- cbind(subject_test, y_test, X_test)
@@ -62,15 +54,16 @@ ttms2$MeanFeatures <- sub("\\-std\\(\\)", "", ttms2$MeanFeatures)
 colnames(ttms2) <- c("Subject_ID","Activities", "Features", "Mean", "STDFeatures", "Standard_Deviation")
 finalttms <- ttms2 %>% select(Subject_ID, Activities, Features, Mean, Standard_Deviation)
 
-finalttms
 
 ##Create second independent tidy dataset with the average of each variable 
 ##for each activity and each subject.
 
 avgdata <- finalttms %>% group_by(Subject_ID, Activities, Features) %>%
-            summarise(AverageMean = mean(Mean), AverageSTD = mean(Standard_Deviation))
-                    
-avgdata
+            summarise(AverageMean = mean(Mean), AverageSTD = mean(Standard_Deviation))           
+
+
+##Export the data to a .txt file
+write.table(avgdata, file = "avgdata.txt", row.name = FALSE)
  
 
 
