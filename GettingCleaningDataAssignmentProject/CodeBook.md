@@ -8,8 +8,7 @@ Activities - column 2
 STANDING and LAYING
 
 Features - column 3
- - The features come from the accelerometer and gyroscope 3-axial raw signals as explained in the README file accompanying this submission.
-Values are: 
+ - The features come from the accelerometer and gyroscope 3-axial raw signals as explained in the README file accompanying this submission. Values are: 
 tBodyAcc-X - Body Acceleration in the X direction denoted in time (t)
 tBodyAcc-Y - Body Acceleration in the Y direction denoted in time (t)
 tBodyAcc-Z - Body Acceleration in the Z direction denoted in time (t)
